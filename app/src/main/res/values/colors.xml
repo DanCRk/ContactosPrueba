@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    // Colores Principales Day
+    <color name="primary">#ffebee</color>
+    <color name="primary_dark">#ccb9bc</color>
+    <color name="primary_light">#ffffff</color>
+    // Colores Secundarios Day
+    <color name="secondary">#ff8a80</color>
+    <color name="secondary_dark">#E65555</color>
+    <color name="secondary_light">#ffbcaf</color>
+
+    // Colores para texto
+    <color name="text_color">#2B2B2B</color>
+
+    <color name="transparent">#00FFFFFF</color>
+</resources>
