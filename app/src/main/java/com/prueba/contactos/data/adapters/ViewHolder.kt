@@ -13,9 +13,7 @@ class ViewHolder (val view: View): RecyclerView.ViewHolder(view){
 
     fun bind(contacto: Contacto, onClickListener:(Contacto)->Unit){
         //cargamos la imagen en la vista
-        Glide.with(view.context)
-            .load(contacto.img)
-            .into(binding.imgContactoList)
+        binding.imgContactoList.setImageResource(contacto.img)
 
         //cargamos el nombre del contacto
         binding.nombreContactoList.text = contacto.nombre
