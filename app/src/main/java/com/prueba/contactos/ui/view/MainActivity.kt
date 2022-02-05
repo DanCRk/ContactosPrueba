@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private val contactosViewModel: ContactosViewModel by viewModels()
     private lateinit var adapter: RecyclerContactosAdapter
     private val contactosList = mutableListOf<Contacto>()
+    private val isVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +33,10 @@ class MainActivity : AppCompatActivity() {
 
         setRecyclerView()
 
-        contactosViewModel.allContacts.observe(this, {list ->
-            if (!list.isNullOrEmpty()){
-                for (ct in list){
-                    if (!contactosList.contains(ct)){
+        contactosViewModel.allContacts.observe(this, { list ->
+            if (!list.isNullOrEmpty()) {
+                for (ct in list) {
+                    if (!contactosList.contains(ct)) {
                         contactosList.add(ct)
                     }
                 }
@@ -55,12 +56,38 @@ class MainActivity : AppCompatActivity() {
     // Funcion cuando se hace click en un contacto
     private fun onItemSelected(contacto: Contacto) {
         val nombreCompleto = contacto.nombre + " " + contacto.apellido
+        contactDetails(contacto)
         Toast.makeText(this, nombreCompleto, Toast.LENGTH_SHORT).show()
     }
 
+    //Funcion para establecer el detalle del contacto
+    private fun contactDetails(contacto: Contacto) {
+        val nombreCompleto = contacto.nombre + " " + contacto.apellido
+        binding.nombre.text = nombreCompleto
+        binding.telefono.text = contacto.telefono
+        if (contacto.empresa != "") {
+            binding.empresa.text = contacto.empresa
+        } else {
+            binding.empresa.text = "Sin empresa"
+        }
+        if (contacto.img == 0) {
+            binding.imgContacto.setImageResource(R.drawable.ic_usuario)
+        } else {
+            binding.imgContacto.setImageResource(contacto.img)
+        }
+    }
+
     // Refrescar el recyclerview
-    private fun refreshRecyclerView(){ if(!contactosList.isNullOrEmpty()){ adapter.notifyDataSetChanged() }else{ showError() } }
+    private fun refreshRecyclerView() {
+        if (!contactosList.isNullOrEmpty()) {
+            adapter.notifyDataSetChanged()
+        } else {
+            showError()
+        }
+    }
 
     // Mostrar un error con un toast
-    private fun showError(){ Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT).show() }
+    private fun showError() {
+        Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
+    }
 }

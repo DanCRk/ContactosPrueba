@@ -3,6 +3,7 @@ package com.prueba.contactos.data.adapters
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.prueba.contactos.R
 import com.prueba.contactos.data.model.Contacto
 import com.prueba.contactos.databinding.ItemContactoBinding
 
@@ -16,7 +17,12 @@ class ViewHolder (val view: View): RecyclerView.ViewHolder(view){
         val nombreCompleto = contacto.nombre + " " + contacto.apellido
 
         //cargamos la imagen en la vista
-        binding.imgContactoList.setImageResource(contacto.img)
+
+        if (contacto.img==(0)){
+            binding.imgContactoList.setImageResource(R.drawable.ic_usuario)
+        }else{
+            binding.imgContactoList.setImageResource(contacto.img)
+        }
 
         //cargamos el nombre del contacto
         binding.nombreContactoList.text = nombreCompleto
