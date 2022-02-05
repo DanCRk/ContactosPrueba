@@ -12,11 +12,14 @@ class ViewHolder (val view: View): RecyclerView.ViewHolder(view){
     private val binding =ItemContactoBinding.bind(view)
 
     fun bind(contacto: Contacto, onClickListener:(Contacto)->Unit){
+
+        val nombreCompleto = contacto.nombre + " " + contacto.apellido
+
         //cargamos la imagen en la vista
         binding.imgContactoList.setImageResource(contacto.img)
 
         //cargamos el nombre del contacto
-        binding.nombreContactoList.text = contacto.nombre
+        binding.nombreContactoList.text = nombreCompleto
 
         // le pasamos el objeto a nuestra funcion listener
         itemView.setOnClickListener {

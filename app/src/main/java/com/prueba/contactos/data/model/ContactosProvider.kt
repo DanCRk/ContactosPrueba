@@ -17,28 +17,28 @@ class ContactosProvider @Inject constructor() {
             nombre = "Kat",
             apellido = "Acosta",
             telefono = "5613245476",
-            empresa = "Google"
+            empresa = "Amazon"
         ),
         Contacto(
             R.drawable.contacto_3,
             nombre = "Jose",
-            apellido = "Anaya",
+            apellido = "Camacho",
             telefono = "5613245476",
-            empresa = "Google"
+            empresa = ""
         ),
         Contacto(
             R.drawable.contacto_4,
             nombre = "Rosa",
             apellido = "Olvera",
             telefono = "5613245476",
-            empresa = "Google"
+            empresa = ""
         ),
         Contacto(
             R.drawable.contacto_5,
             nombre = "Grecia",
-            apellido = "Camacho",
+            apellido = "Anaya",
             telefono = "5613245476",
-            empresa = "Google"
+            empresa = "Oxxo"
         ),
     )
 }

@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class ContactosViewModel @Inject constructor(
     private val getAllContactsUseCase: GetAllContactsUseCase
 ):ViewModel(){
     // establecer la variable de tipo live data que contendra nuestra lista de contactos
