@@ -53,7 +53,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:id="@+id/details">
 
                 <ImageView
                     android:id="@+id/img_contacto"
@@ -139,6 +141,7 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/borrarContacto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
@@ -161,8 +164,8 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="35dp"
         android:backgroundTint="@color/secondary_light"
         android:clickable="true"
         android:src="@drawable/ic_mas"

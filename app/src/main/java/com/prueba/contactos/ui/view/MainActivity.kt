@@ -1,19 +1,15 @@
 package com.prueba.contactos.ui.view
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.prueba.contactos.R
 import com.prueba.contactos.data.adapters.RecyclerContactosAdapter
 import com.prueba.contactos.data.model.Contacto
-import androidx.activity.viewModels
-import com.prueba.contactos.R
 import com.prueba.contactos.databinding.ActivityMainBinding
 import com.prueba.contactos.ui.viewmodel.ContactosViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: RecyclerContactosAdapter
     private val contactosList = mutableListOf<Contacto>()
     private var isvisible: Boolean = false
-    var dialog = AddDialog()
     lateinit var contactoSelected: Contacto
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,29 +46,38 @@ class MainActivity : AppCompatActivity() {
             refreshRecyclerView()
         })
 
-        contactosViewModel.contactsDeleted.observe(this, { list ->
-            contactosList.clear()
-            for (ct in list) {
-                if (!contactosList.contains(ct)) {
-                    contactosList.add(ct)
-                }
-            }
+        // observar si hay algun cambioo en el viewmodel que nos diga si debemos borrar un elemento de la lista
+        contactosViewModel.contactDeleted.observe(this, { ct ->
+            contactosList.remove(ct)
             refreshRecyclerView()
+            Toast.makeText(this, "Contacto borrado", Toast.LENGTH_SHORT).show()
         })
 
-        binding.borrarContacto?.setOnClickListener {
+        // comprobar si hay un nuevo contacto y si lo hay
+        contactosViewModel.addContacts.observe(this, { list ->
+            contactosList.add(list.last())
+            refreshRecyclerView()
+            Toast.makeText(this, "Contacto añadido", Toast.LENGTH_SHORT).show()
+        })
+
+        // listener del boton para borraer el contacto, se le pasa el que esta en detalles para borrarlo del repositorio
+        binding.borrarContacto.setOnClickListener {
             contactosViewModel.deleteContact(contactoSelected)
-            isvisible=false
-            binding.details?.visibility = ViewGroup.GONE
+            isvisible = false
+            binding.details.visibility = ViewGroup.GONE
         }
 
-        addContact()
+        addContactDialogFragment()
     }
 
-    fun addContact(){
+    fun addContactDialogFragment() {
+        //llamamos al dialog framgent y recibimos el contacto introducido por el usuario
         binding.addcontactos?.setOnClickListener {
-            dialog.isCancelable = false
-            dialog.show(supportFragmentManager ,"addDialog")
+            AddDialog(
+                onSubmitClickListener = { contacto ->
+                    contactosViewModel.addContact(contacto)
+                }
+            ).show(supportFragmentManager, "addDialogFragment")
         }
     }
 
@@ -85,9 +89,8 @@ class MainActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
     }
 
-    // Funcion cuando se hace click en un contacto
+    // Funcion cuando se hace click en un contacto de la lista se lo mandamos a detalles y hacemos visible el layout con los detalles
     private fun onItemSelected(contacto: Contacto) {
-
         contactoSelected = contacto
         contactDetails()
         //Comprobar si el layout de detalles es visible, si no es asi lo muestras
@@ -97,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //Funcion para establecer el detalle del contacto
+    //Funcion para establecer el detalle del contacto en la vista
     private fun contactDetails() {
         val nombreCompleto = contactoSelected.nombre + " " + contactoSelected.apellido
         binding.nombre.text = nombreCompleto
@@ -107,10 +110,15 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding.empresa.text = getString(R.string.sin_empresa)
         }
-        if (contactoSelected.img == 0) {
-            binding.imgContacto.setImageResource(R.drawable.ic_usuario)
-        } else {
-            binding.imgContacto.setImageResource(contactoSelected.img)
+        if (!contactoSelected.img.equals(0)){
+            Glide.with(this)
+                .load(contactoSelected.img)
+                .into(binding.imgContacto)
+        }else{
+            Glide.with(this)
+                .asDrawable()
+                .load(contactoSelected.img2)
+                .into(binding.imgContacto)
         }
     }
 
@@ -125,6 +133,6 @@ class MainActivity : AppCompatActivity() {
 
     // Mostrar un error con un toast
     private fun showError() {
-        Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Sin contactos", Toast.LENGTH_SHORT).show()
     }
 }

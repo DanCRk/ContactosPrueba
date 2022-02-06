@@ -1,6 +1,6 @@
 package com.prueba.contactos.domain
 
-import com.prueba.contactos.Repositorio
+import com.prueba.contactos.data.Repositorio
 import com.prueba.contactos.data.model.Contacto
 import javax.inject.Inject
 

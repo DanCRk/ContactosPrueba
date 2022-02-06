@@ -7,6 +7,7 @@ class ContactosProvider @Inject constructor() {
     var contactos = mutableListOf<Contacto>(
         Contacto(
             R.drawable.contacto_1,
+            null,
             nombre = "Paola",
             apellido = "Marin",
             telefono = "5613245476",
@@ -14,6 +15,7 @@ class ContactosProvider @Inject constructor() {
         ),
         Contacto(
             R.drawable.contacto_2,
+            null,
             nombre = "Kat",
             apellido = "Acosta",
             telefono = "5571836782",
@@ -21,13 +23,15 @@ class ContactosProvider @Inject constructor() {
         ),
         Contacto(
             R.drawable.contacto_3,
-            nombre = "Jose",
-            apellido = "Camacho",
+            null,
+            nombre = "Daniel",
+            apellido = "Avila",
             telefono = "5838367846",
-            empresa = ""
+            empresa = "Smart Scale"
         ),
         Contacto(
             R.drawable.contacto_4,
+            null,
             nombre = "Rosa",
             apellido = "Olvera",
             telefono = "5583572712",
@@ -35,13 +39,15 @@ class ContactosProvider @Inject constructor() {
         ),
         Contacto(
             R.drawable.contacto_5,
+            null,
             nombre = "Grecia",
             apellido = "Anaya",
             telefono = "5942735737",
             empresa = "Oxxo"
         ),
         Contacto(
-            0,
+            R.drawable.ic_usuario,
+            null,
             nombre = "Elias",
             apellido = "Ruíz",
             telefono = "5973736852",
@@ -49,7 +55,9 @@ class ContactosProvider @Inject constructor() {
         )
     )
 
-
+    fun addContact(contacto: Contacto){
+        contactos.add(contacto)
+    }
 
     fun removeContact(contacto: Contacto){
         contactos.remove(contacto)

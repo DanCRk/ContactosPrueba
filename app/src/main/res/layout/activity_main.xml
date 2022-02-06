@@ -4,34 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="HardcodedText"
-    tools:context=".ui.view.MainActivity">
+    tools:context=".ui.view.MainActivity"
+    tools:ignore="HardcodedText">
 
     <TextView
         android:id="@+id/contactos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/contactos"
         android:layout_marginStart="40dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:fontFamily="@font/font_main"
+        android:orientation="horizontal"
+        android:text="@string/contactos"
         android:textColor="@color/secondary_dark"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/contacto_detalle"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="50dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="25dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:paddingBottom="50dp"
         app:cardCornerRadius="9dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,35 +39,43 @@
         app:layout_constraintTop_toBottomOf="@+id/contactos">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:visibility="gone"
             android:id="@+id/details"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
-            <ImageView
-                app:riv_corner_radius="20dp"
-                android:id="@+id/img_contacto"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/img_container"
                 android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:layout_height="130dp"
-                android:background="@color/secondary_dark"
-                android:scaleType="centerCrop"
-                android:layout_marginStart="20dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription" />
+                app:layout_constraintTop_toTopOf="parent">
 
+                <ImageView
+                    android:id="@+id/img_contacto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/secondary_dark"
+                    android:scaleType="centerCrop"
+
+                    tools:ignore="ContentDescription" />
+
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:orientation="vertical"
-                app:layout_constraintLeft_toRightOf="@+id/img_contacto"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_height="wrap_content">
+                app:layout_constraintLeft_toRightOf="@+id/img_container"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -86,7 +94,7 @@
                     android:fontFamily="@font/font_main"
                     android:text="Dann Avila"
                     android:textColor="@color/text_color"
-                    android:textSize="17sp"/>
+                    android:textSize="17sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -105,7 +113,7 @@
                     android:fontFamily="@font/font_main"
                     android:text="56 1957 2122"
                     android:textColor="@color/text_color"
-                    android:textSize="17sp"/>
+                    android:textSize="17sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -124,8 +132,7 @@
                     android:fontFamily="@font/font_main"
                     android:text="SmartScale"
                     android:textColor="@color/text_color"
-                    android:textSize="17sp"
-                     />
+                    android:textSize="17sp" />
 
             </LinearLayout>
 
@@ -133,12 +140,12 @@
                 android:id="@+id/borrarContacto"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:src="@drawable/ic_delete"
-                app:tint="@color/secondary_light"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="5dp"
+                app:tint="@color/secondary_light"
                 tools:ignore="ContentDescription" />
 
 
@@ -159,8 +166,8 @@
         android:id="@+id/addcontactos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="35dp"
         android:backgroundTint="@color/secondary_light"
         android:clickable="true"
         android:src="@drawable/ic_mas"

@@ -4,11 +4,10 @@ import com.prueba.contactos.data.Repositorio
 import com.prueba.contactos.data.model.Contacto
 import javax.inject.Inject
 
-class DeleteContactUseCase @Inject constructor(private val repositorio: Repositorio){
+class AddContactUseCase @Inject constructor(private val repositorio: Repositorio){
 
-    // establecemos el caso de uso donde borramos el contacto seleccionado
+    // establecemos el caso de uso donde añadimos el contacto seleccionado
     operator fun invoke(contacto: Contacto): List<Contacto> {
-        return repositorio.deleteContact(contacto)
+        return repositorio.addContact(contacto)
     }
-
 }

@@ -1,19 +1,14 @@
 package com.prueba.contactos.ui.view
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -21,18 +16,22 @@ import com.prueba.contactos.R
 import com.prueba.contactos.data.model.Contacto
 import com.prueba.contactos.databinding.FragmentDialogDeleteBinding
 
-class AddDialog() : DialogFragment() {
+
+class AddDialog(
+    private val onSubmitClickListener:(Contacto) -> Unit
+) : DialogFragment() {
 
     private var _binding: FragmentDialogDeleteBinding? = null
     private val binding get() = _binding!!
     private lateinit var contactoNuevo: Contacto
-    private var validartelefono = false
+     private var validartelefono = false
     private var validarnombre = false
     private lateinit var nombre: String
     private lateinit var apellido: String
     private lateinit var empresa: String
     private lateinit var telefono: String
     private var imageUri: Uri? = null
+
 
 
     override fun onCreateView(
@@ -47,6 +46,7 @@ class AddDialog() : DialogFragment() {
             dismiss()
         }
 
+        // validacion de los campos introducidos
 
         binding.submitButton.setOnClickListener {
             if (!binding.addNombre.text.isNullOrEmpty()) {
@@ -75,12 +75,22 @@ class AddDialog() : DialogFragment() {
                 ""
             }
 
+
+            // validacion si hay un nombre y un numero de celular, si lo hay le pasamos el contacto al main y cerramos el dialog
             if (validartelefono && validarnombre) {
-                contactoNuevo = Contacto(0, nombre, apellido, telefono, empresa)
+                if (binding.addImage.drawable == null){
+                    contactoNuevo = Contacto(R.drawable.ic_usuario, null, nombre, apellido, telefono, empresa)
+
+                }else{
+                    contactoNuevo = Contacto(0,binding.addImage.drawable, nombre, apellido, telefono, empresa)
+                }
+                onSubmitClickListener.invoke(contactoNuevo)
                 setAllEmpty()
                 dismiss()
             }
         }
+
+        // Estos dos metodos son para cargar la uimagen, si se pulsa en el icono o si despues se gusta cambiar laimagen previamente seleccionada
 
         binding.addFoto.setOnClickListener {
             loadImageFromGalry()
@@ -93,6 +103,7 @@ class AddDialog() : DialogFragment() {
         return binding.root
     }
 
+    // Setea todas las vistas en defauilt para un nuevo contacto
     private fun setAllEmpty() {
         binding.addNombre.text = null
         binding.addApellido.text = null
@@ -102,6 +113,8 @@ class AddDialog() : DialogFragment() {
         binding.addImage.visibility = ViewGroup.GONE
     }
 
+
+    // Intent para abrir la galeria
     @SuppressLint("IntentReset")
     fun loadImageFromGalry() {
         val intent = Intent(
@@ -111,6 +124,7 @@ class AddDialog() : DialogFragment() {
         this.startActivityForResult(intent, 100)
     }
 
+    // regresa la imagen seleccionada por el usuario
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
@@ -124,6 +138,8 @@ class AddDialog() : DialogFragment() {
         }
     }
 
+
+     // Reiniciamos las variables para comprobar
     override fun onDestroy() {
         super.onDestroy()
         validartelefono = false
