@@ -4,4 +4,11 @@
     <string name="nombre">Nombre</string>
     <string name="telefono">Teléfono</string>
     <string name="empresa">Empresa</string>
+    <string name="sin_empresa">Sin empresa</string>
+    <string name="seguro_que_quieres_borrar_el_contacto">¿Seguro que quieres borrar el contacto?</string>
+    <string name="borrar">Borrar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="apellido">Apellido</string>
+    <string name="agregar">agregar</string>
+    <string name="añadir_foto">Añadir foto</string>
 </resources>

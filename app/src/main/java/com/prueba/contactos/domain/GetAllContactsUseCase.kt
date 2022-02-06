@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetAllContactsUseCase @Inject constructor(private val repositorio: Repositorio){
 
     // establecemos el caso de uso donde recuperamos todos los contactos
-    operator fun invoke():List<Contacto>{
+    operator fun invoke(): List<Contacto> {
         return repositorio.getAllContacts()
     }
 }

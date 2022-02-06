@@ -4,7 +4,7 @@ import com.prueba.contactos.R
 import javax.inject.Inject
 
 class ContactosProvider @Inject constructor() {
-    val contacto = listOf(
+    var contactos = mutableListOf<Contacto>(
         Contacto(
             R.drawable.contacto_1,
             nombre = "Paola",
@@ -48,4 +48,10 @@ class ContactosProvider @Inject constructor() {
             empresa = ""
         )
     )
+
+
+
+    fun removeContact(contacto: Contacto){
+        contactos.remove(contacto)
+    }
 }
