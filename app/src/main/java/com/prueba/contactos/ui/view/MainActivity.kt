@@ -60,14 +60,28 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Contacto añadido", Toast.LENGTH_SHORT).show()
         })
 
-        // listener del boton para borraer el contacto, se le pasa el que esta en detalles para borrarlo del repositorio
-        binding.borrarContacto.setOnClickListener {
-            contactosViewModel.deleteContact(contactoSelected)
-            isvisible = false
-            binding.details.visibility = ViewGroup.GONE
-        }
+        deleteContactDialogFragment()
 
         addContactDialogFragment()
+    }
+
+    // llamar al dialogo y verificar si se desea borrar el contacto
+    fun deleteContactDialogFragment(){
+        binding.borrarContacto.setOnClickListener {
+            DeleteDialog(
+                onSubmitClickListener = { delete ->
+                    if (delete){
+                        // llamamos a la funcion del viewmodel para borrar el contacto de la base de datos
+                        contactosViewModel.deleteContact(contactoSelected)
+
+                        // seteamos la variable "isvisible" en false que hace referencia al cardview con los detalles del contacto
+                        // y hacemos que este no sea visible
+                        isvisible = false
+                        binding.details.visibility = ViewGroup.GONE
+                    }
+                }
+            ).show(supportFragmentManager,"deleteDialogFragment")
+        }
     }
 
     fun addContactDialogFragment() {

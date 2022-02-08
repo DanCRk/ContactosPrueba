@@ -14,14 +14,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.prueba.contactos.R
 import com.prueba.contactos.data.model.Contacto
-import com.prueba.contactos.databinding.FragmentDialogDeleteBinding
+import com.prueba.contactos.databinding.FragmentDialogAddBinding
 
 
 class AddDialog(
     private val onSubmitClickListener:(Contacto) -> Unit
 ) : DialogFragment() {
 
-    private var _binding: FragmentDialogDeleteBinding? = null
+    private var _binding: FragmentDialogAddBinding? = null
     private val binding get() = _binding!!
     private lateinit var contactoNuevo: Contacto
      private var validartelefono = false
@@ -39,7 +39,7 @@ class AddDialog(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDialogDeleteBinding.inflate(layoutInflater)
+        _binding = FragmentDialogAddBinding.inflate(layoutInflater)
         dialog!!.window?.setBackgroundDrawableResource(R.color.transparent)
 
         binding.cancelButton.setOnClickListener {

@@ -63,7 +63,6 @@
                     android:layout_height="match_parent"
                     android:background="@color/secondary_dark"
                     android:scaleType="centerCrop"
-
                     tools:ignore="ContentDescription" />
 
             </androidx.cardview.widget.CardView>
@@ -145,6 +144,7 @@
                 android:src="@drawable/ic_delete"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
                 app:tint="@color/secondary_light"
                 tools:ignore="ContentDescription" />
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".ui.view.DeleteDialog">
+    tools:context=".ui.view.AddDialog">
 
     <LinearLayout
         android:id="@+id/llt"
@@ -21,17 +21,91 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <EditText
+            android:id="@+id/addNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:drawableStart="@drawable/ic_usuario"
+            android:fontFamily="@font/font_main"
+            android:gravity="center_horizontal"
+            android:hint="@string/nombre"
+            android:textAlignment="center"
+            android:textColorHint="@color/secondary_light"
+            android:textSize="17sp"
+            app:tint="@color/white" />
+
+        <EditText
+            android:id="@+id/addApellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:drawableStart="@drawable/ic_usuario"
+            android:fontFamily="@font/font_main"
+            android:gravity="center_horizontal"
+            android:hint="@string/apellido"
+            android:textAlignment="center"
+            android:textColorHint="@color/secondary_light"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/addTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:drawableStart="@drawable/ic_teledono"
+            android:fontFamily="@font/font_main"
+            android:gravity="center_horizontal"
+            android:hint="@string/telefono"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColorHint="@color/secondary_light"
+            android:textSize="17sp" />
+
+        <EditText
             android:id="@+id/addEmpresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
+            android:drawableStart="@drawable/ic_empresa"
             android:fontFamily="@font/font_main"
             android:gravity="center_horizontal"
-            android:text="@string/seguro_que_quieres_borrar_el_contacto"
+            android:hint="@string/empresa"
             android:textAlignment="center"
             android:textColorHint="@color/secondary_light"
-            android:textSize="18sp" />
+            android:textSize="17sp" />
+
+
+        <LinearLayout
+            android:id="@+id/containerAddFoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/addFoto"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/circulo"
+                android:padding="14dp"
+                android:src="@drawable/ic_add_foto"
+                app:tint="@color/white" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/font_main"
+                android:gravity="center_horizontal"
+                android:hint="@string/añadir_foto"
+                android:textAlignment="center"
+                android:textColorHint="@color/text_color"
+                android:textSize="17sp" />
+        </LinearLayout>
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:visibility="gone"
@@ -64,14 +138,14 @@
                 android:textSize="15sp" />
 
             <Button
-                android:id="@+id/deleteButton"
+                android:id="@+id/submitButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:background="@color/transparent"
                 android:fontFamily="@font/font_main"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:text="@string/borrar"
+                android:text="@string/agregar"
                 android:textColor="@color/secondary"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -82,7 +156,7 @@
         android:layout_height="60dp"
         android:background="@drawable/circulo"
         android:padding="10dp"
-        android:src="@drawable/ic_delete"
+        android:src="@drawable/ic_mas"
         app:layout_constraintBottom_toTopOf="@id/llt"
         app:layout_constraintEnd_toEndOf="@id/llt"
         app:layout_constraintStart_toStartOf="@id/llt"
