@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginTop
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.prueba.contactos.R
@@ -78,6 +79,7 @@ class MainActivity : AppCompatActivity() {
                         // y hacemos que este no sea visible
                         isvisible = false
                         binding.details.visibility = ViewGroup.GONE
+                        binding.rvcontactos.setPadding(0,0,0,0)
                     }
                 }
             ).show(supportFragmentManager,"deleteDialogFragment")
@@ -109,7 +111,8 @@ class MainActivity : AppCompatActivity() {
         contactDetails()
         //Comprobar si el layout de detalles es visible, si no es asi lo muestras
         if (!isvisible) {
-            binding.details?.visibility = ViewGroup.VISIBLE
+            binding.rvcontactos.setPadding(0,420,0,0)
+            binding.details.visibility = ViewGroup.VISIBLE
             isvisible = true
         }
     }
